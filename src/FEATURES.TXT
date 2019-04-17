@@ -1,0 +1,5 @@
+- ADD RESULT FILTERING WITH EXPANSION PANELS
+    -Color should be filtered with SELECTION CONTROLS
+
+- When a card is added to a collection, show a snackbar
+

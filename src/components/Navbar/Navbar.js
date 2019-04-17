@@ -25,6 +25,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import InputBase from '@material-ui/core/InputBase';
 import Menu from '@material-ui/core/Menu';
+import eventsHub from '../../utils/eventsHub';
 
 const drawerWidth = 240;
 
@@ -150,12 +151,14 @@ const styles = (theme) => ({
 });
 
 class Navbar extends React.Component {
-	state = {
-		open: false,
-		anchorEl: null,
-		mobileMoreAnchorEl: null,
-		searchField: ''
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			open: false,
+			anchorEl: null,
+			mobileMoreAnchorEl: null
+		};
+	}
 
 	handleProfileMenuOpen = (e) => {
 		this.setState({ anchorEl: e.currentTarget });
@@ -174,13 +177,9 @@ class Navbar extends React.Component {
 		this.setState({ mobileMoreAnchorEl: null });
 	};
 
-	handleChangeSearch = (e) => {
-		this.setState({ searchField: e.target.value });
-	};
-
-	search = (e) => {
+	quickSearch = (e) => {
 		if (e.key === 'Enter') {
-			this.props.search(this.state.searchField);
+			eventsHub.setQuickSearch(e.target.value);
 		}
 	};
 
@@ -257,8 +256,7 @@ class Navbar extends React.Component {
 							</div>
 							<InputBase
 								placeholder="Search…"
-								onKeyPress={this.search}
-								onChange={this.handleChangeSearch}
+								onKeyPress={this.quickSearch}
 								classes={{
 									root: classes.inputRoot,
 									input: classes.inputInput
@@ -317,7 +315,7 @@ class Navbar extends React.Component {
 					<List>
 						{[ 'All mail', 'Trash', 'Spam' ].map((text, index) => (
 							<ListItem button key={text}>
-								<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+								<ListItemIcon>{index % 2 === 0 ? <MailIcon /> : <InboxIcon />}</ListItemIcon>
 								<ListItemText primary={text} />
 							</ListItem>
 						))}
