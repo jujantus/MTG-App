@@ -10,8 +10,8 @@ import BlueU from '../../../assets/Mana_U_unchecked.png';
 import RedU from '../../../assets/Mana_R_unchecked.png';
 import WhiteU from '../../../assets/Mana_W_unchecked.png';
 import GreenU from '../../../assets/Mana_G_unchecked.png';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+// import { withStyles } from '@material-ui/core/styles';
+// import PropTypes from 'prop-types';
 
 // const styles = (theme) => ({
 //     container:{

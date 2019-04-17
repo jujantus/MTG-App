@@ -3,3 +3,5 @@
 
 - When a card is added to a collection, show a snackbar
 
+- Add autosuggest to quickSearch
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import CardGrid from '../../components/CardGrid/CardGrid';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner2';
 import NotFound from '../../components/NotFound/notFound';
 import eventsHub from '../../utils/eventsHub';
 import webService from '../../utils/webService';
@@ -63,8 +63,9 @@ class RenderSearch extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				{this.state.loading ? <Spinner /> : null}
-				{this.state.error ? (
+				{this.state.loading ? (
+					<Spinner />
+				) : this.state.error ? (
 					<NotFound />
 				) : this.state.cardList ? (
 					<React.Fragment>

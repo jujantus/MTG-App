@@ -10,7 +10,8 @@ import ManaCheckbox from './ManaCheckbox/ManaCheckbox2';
 
 const styles = (theme) => ({
 	root: {
-		width: '100%'
+		width: '100%',
+		padding: '5px'
 	},
 	heading: {
 		fontSize: theme.typography.pxToRem(15),
