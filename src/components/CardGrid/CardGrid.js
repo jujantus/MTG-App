@@ -7,7 +7,8 @@ import CardItem from '../CardItem/CardItem';
 
 const styles = (theme) => ({
 	root: {
-		flexGrow: 1
+		flexGrow: 1,
+		marginTop: 0
 	},
 	card: {
 		height: 400,
@@ -25,12 +26,10 @@ class CardGrid extends React.Component {
 		const { spacing } = this.state;
 
 		return (
-			<Grid container className={classes.root} spacing={16}>
-				<Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-					{this.props.cards.map((card, index) => (
-						<CardItem key={card.oracle_id} card={card} timeout={index * 100} classes={classes} />
-					))}
-				</Grid>
+			<Grid container className={classes.root} justify="center" spacing={Number(spacing)}>
+				{this.props.cards.map((card, index) => (
+					<CardItem key={card.oracle_id} card={card} timeout={index * 100} classes={classes} />
+				))}
 			</Grid>
 		);
 	}

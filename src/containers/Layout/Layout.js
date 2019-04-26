@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
-import RenderSearch from '../../components/RenderSearch/RenderSearch';
+import RenderSearch from '../../components/RenderBody/RenderSearch';
 
 class Layout extends React.Component {
 	render() {

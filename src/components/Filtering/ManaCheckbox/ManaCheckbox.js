@@ -1,5 +1,12 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Black from '../../../assets/Mana_B.png';
 import Blue from '../../../assets/Mana_U.png';
 import Red from '../../../assets/Mana_R.png';
@@ -10,115 +17,146 @@ import BlueU from '../../../assets/Mana_U_unchecked.png';
 import RedU from '../../../assets/Mana_R_unchecked.png';
 import WhiteU from '../../../assets/Mana_W_unchecked.png';
 import GreenU from '../../../assets/Mana_G_unchecked.png';
-// import { withStyles } from '@material-ui/core/styles';
-// import PropTypes from 'prop-types';
+import '../../../../node_modules/mana-font/css/mana.min.css';
 
-// const styles = (theme) => ({
-//     container:{
-//         display: 'grid',
-//         height:200,
-//         width:200
-//     }
-// })
+const styles = (theme) => ({
+	root: {
+		display: 'flex'
+	},
+	formControl: {
+		margin: theme.spacing.unit * 2
+	}
+});
 
 class ManaCheckbox extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			checkedW: false,
-			checkedU: false,
-			checkedB: false,
-			checkedR: false,
-			checkedG: false
+			icons: [],
+			iconSize: 40,
+			iconPadding: 5,
+			width: 250,
+			height: 250,
+			filter: null
 		};
+		this.state.icons.push({ name: 'W', state: false, srcOn: White, srcOff: WhiteU });
+		this.state.icons.push({ name: 'U', state: false, srcOn: Blue, srcOff: BlueU });
+		this.state.icons.push({ name: 'B', state: false, srcOn: Black, srcOff: BlackU });
+		this.state.icons.push({ name: 'R', state: false, srcOn: Red, srcOff: RedU });
+		this.state.icons.push({ name: 'G', state: false, srcOn: Green, srcOff: GreenU });
 	}
 
-	handleChange = (name) => (event) => {
-		this.setState({ [name]: event.target.checked });
+	handleChange = (index) => {
+		let icons = [ ...this.state.icons ];
+		let newIcon = { ...icons[index] };
+		newIcon.state = !newIcon.state;
+		icons[index] = newIcon;
+
+		this.setState({ icons });
+	};
+
+	handleCriteriaChange = (event) => {
+		this.setState({ filter: event.target.value });
 	};
 
 	render() {
-		// const { classes } = this.props;
+		const { classes } = this.props;
+		const selectedColors = this.state.icons.filter((icon) => icon.state === true);
+		const MANASYMBOL = {
+			W: <i className="ms ms-w" />,
+			U: <i className="ms ms-u" />,
+			B: <i className="ms ms-b" />,
+			R: <i className="ms ms-r" />,
+			G: <i className="ms ms-g" />
+		};
+		const colors = [];
+		selectedColors.forEach((color) => {
+			colors.push(MANASYMBOL[color.name]);
+		});
+		const FILTERS =
+			selectedColors.length > 0
+				? selectedColors.length === 1
+					? { soft: 'May include others', softStrict: 'No other colors' }
+					: {
+							soft: 'May include others',
+							composed: 'Must include combination',
+							softStrict: 'No other colors',
+							composedStrict: 'Include exact combination'
+						}
+				: null;
+
 		return (
-			<div
-				style={{
-					height: '200px',
-					width: '200px'
-				}}
-			>
-				<Checkbox
+			<div>
+				<div
 					style={{
-						position: 'absolute',
-						top: '0px',
-						left: '75px',
-						padding: '5px'
+						height: this.state.height + 'px',
+						width: this.state.width + 'px',
+						position: 'relative',
+						float: 'left'
 					}}
-					checkedIcon={<img src={White} alt="checked" height="40" objectFit="contain" />}
-					icon={<img src={WhiteU} alt="unchecked" height="40" objectFit="contain" />}
-					checked={this.state.checkedW}
-					onChange={this.handleChange('checkedW')}
-					value="checkedW"
-				/>
-				<Checkbox
-					style={{
-						position: 'absolute',
-						top: '60px',
-						left: '150px',
-						padding: '5px'
-					}}
-					checkedIcon={<img src={Blue} alt="checked" height="40" objectFit="contain" />}
-					icon={<img src={BlueU} alt="unchecked" height="40" objectFit="contain" />}
-					checked={this.state.checkedU}
-					onChange={this.handleChange('checkedU')}
-					value="checkedU"
-				/>
-				<Checkbox
-					style={{
-						position: 'absolute',
-						top: '150px',
-						left: '117px',
-						padding: '5px'
-					}}
-					checkedIcon={<img src={Black} alt="checked" height="40" objectFit="contain" />}
-					icon={<img src={BlackU} alt="unchecked" height="40" objectFit="contain" />}
-					checked={this.state.checkedB}
-					onChange={this.handleChange('checkedB')}
-					value="checkedB"
-				/>
-				<Checkbox
-					style={{
-						position: 'absolute',
-						top: '150px',
-						left: '33px',
-						padding: '5px'
-					}}
-					checkedIcon={<img src={Red} alt="checked" height="40" objectFit="contain" />}
-					icon={<img src={RedU} alt="unchecked" height="40" objectFit="contain" />}
-					checked={this.state.checkedR}
-					onChange={this.handleChange('checkedR')}
-					value="checkedR"
-				/>
-				<Checkbox
-					style={{
-						position: 'absolute',
-						top: '60px',
-						left: '0px',
-						padding: '5px'
-					}}
-					checkedIcon={<img src={Green} alt="checked" height="40" objectFit="contain" />}
-					icon={<img src={GreenU} alt="unchecked" height="40" objectFit="contain" />}
-					checked={this.state.checkedG}
-					onChange={this.handleChange('checkedG')}
-					value="checkedG"
-				/>
+				>
+					{this.state.icons.map((icon, index) => {
+						const a0 = -Math.PI / 2;
+						const a = a0 + index * 2 * Math.PI / this.state.icons.length;
+						const r = this.state.width / 2 - this.state.iconSize - this.state.iconPadding * 2;
+						const dx = r * Math.cos(a);
+						const dy = r * Math.sin(a);
+						const x = this.state.width / 2 + dx - this.state.iconSize / 2 - this.state.iconPadding;
+						const y = this.state.height / 2 + dy - this.state.iconSize / 2 - this.state.iconPadding;
+
+						return (
+							<Checkbox
+								key={index}
+								style={{
+									position: 'absolute',
+									top: y + 'px',
+									left: x + 'px',
+									padding: this.state.iconPadding + 'px'
+								}}
+								checkedIcon={<img src={icon.srcOn} alt="checked" height={this.state.iconSize} />}
+								icon={
+									<img
+										style={{ opacity: 0.7 }}
+										src={icon.srcOff}
+										alt="unchecked"
+										height={this.state.iconSize}
+									/>
+								}
+								checked={this.state.checkedW}
+								onChange={() => this.handleChange(index)}
+							/>
+						);
+					})}
+				</div>
+				<div style={{ float: 'right' }}>
+					<FormControl component="fieldset" className={classes.formControl}>
+						<FormLabel component="legend">Filter criteria</FormLabel>
+						<RadioGroup value={this.state.filter} onChange={this.handleCriteriaChange}>
+							{FILTERS ? (
+								Object.keys(FILTERS).map((key) => {
+									return (
+										<FormControlLabel
+											value={key}
+											control={<Radio />}
+											label={
+												<p>
+													{FILTERS[key]} {colors}
+												</p>
+											}
+										/>
+									);
+								})
+							) : null}
+						</RadioGroup>
+					</FormControl>
+				</div>
 			</div>
 		);
 	}
 }
 
-// ManaCheckbox.propTypes = {
-// 	classes: PropTypes.object.isRequired,
-// 	theme: PropTypes.object.isRequired
-// };
-export default ManaCheckbox;
-// export default withStyles(styles, { withTheme: true })(ManaCheckbox);
+ManaCheckbox.propTypes = {
+	classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(ManaCheckbox);

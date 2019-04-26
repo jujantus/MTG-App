@@ -6,12 +6,15 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ManaCheckbox from './ManaCheckbox/ManaCheckbox2';
+import ManaCheckbox from '../src/components/Filtering/ManaCheckbox/ManaCheckbox';
 
 const styles = (theme) => ({
 	root: {
 		width: '100%',
 		padding: '5px'
+	},
+	panel: {
+		width: '200px'
 	},
 	heading: {
 		fontSize: theme.typography.pxToRem(15),
@@ -22,12 +25,12 @@ const styles = (theme) => ({
 function SimpleExpansionPanel(props) {
 	const { classes } = props;
 	return (
-		<div className={classes.root}>
+		<div className={classes.panel}>
 			<ExpansionPanel>
-				<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-					<Typography className={classes.heading}>Expansion Panel 1</Typography>
+				<ExpansionPanelSummary className={classes.panel} expandIcon={<ExpandMoreIcon />}>
+					{/* <Typography className={classes.heading}>Expansion Panel 1</Typography> */}
 				</ExpansionPanelSummary>
-				<ExpansionPanelDetails>
+				<ExpansionPanelDetails className={classes.root}>
 					<ManaCheckbox />
 				</ExpansionPanelDetails>
 			</ExpansionPanel>

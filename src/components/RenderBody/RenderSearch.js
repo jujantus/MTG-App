@@ -1,10 +1,14 @@
 import React from 'react';
 import CardGrid from '../../components/CardGrid/CardGrid';
-import Spinner from '../../components/Spinner/Spinner2';
+import Spinner from '../Spinner/Spinner';
 import NotFound from '../../components/NotFound/notFound';
 import eventsHub from '../../utils/eventsHub';
 import webService from '../../utils/webService';
-import ExpansionPanelFilter from '../Filtering/ExpansionPanelFilter';
+import FilterIcon from '@material-ui/icons/FilterList';
+import Fab from '@material-ui/core/Fab';
+import ManaCheckbox from '../Filtering/ManaCheckbox/ManaCheckbox';
+import LineGridList from '../LineGridList';
+import Collapse from '@material-ui/core/Collapse';
 
 class RenderSearch extends React.Component {
 	constructor(props) {
@@ -12,7 +16,8 @@ class RenderSearch extends React.Component {
 		this.state = {
 			cardList: null,
 			loading: false,
-			error: false
+			error: false,
+			filter: false
 		};
 	}
 
@@ -60,6 +65,34 @@ class RenderSearch extends React.Component {
 		});
 	};
 
+	toggleFilter = () => {
+		let state = { ...this.state };
+		state.filter = !state.filter;
+		this.setState({ ...state });
+	};
+
+	renderFilter = () => {
+		return (
+			<React.Fragment>
+				<Fab
+					onClick={this.toggleFilter}
+					style={{
+						position: 'absolute',
+						top: 78,
+						right: 15,
+						color: 'primary'
+					}}
+				>
+					<FilterIcon />
+				</Fab>
+
+				<Collapse in={this.state.filter}>
+					<LineGridList>{[ <ManaCheckbox key={'hola'} /> ]}</LineGridList>
+				</Collapse>
+			</React.Fragment>
+		);
+	};
+
 	render() {
 		return (
 			<React.Fragment>
@@ -69,7 +102,7 @@ class RenderSearch extends React.Component {
 					<NotFound />
 				) : this.state.cardList ? (
 					<React.Fragment>
-						<ExpansionPanelFilter />
+						{this.renderFilter()}
 						<CardGrid cards={this.state.cardList.data} />
 					</React.Fragment>
 				) : null}
