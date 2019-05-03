@@ -63,11 +63,11 @@ class ManaCheckbox extends React.Component {
 		const { classes } = this.props;
 		const selectedColors = this.state.icons.filter((icon) => icon.state === true);
 		const MANASYMBOL = {
-			W: <i className="ms ms-w" />,
-			U: <i className="ms ms-u" />,
-			B: <i className="ms ms-b" />,
-			R: <i className="ms ms-r" />,
-			G: <i className="ms ms-g" />
+			W: <i className="ms ms-w ms-cost ms-shadow" />,
+			U: <i className="ms ms-u ms-cost ms-shadow" />,
+			B: <i className="ms ms-b ms-cost ms-shadow" />,
+			R: <i className="ms ms-r ms-cost ms-shadow" />,
+			G: <i className="ms ms-g ms-cost ms-shadow" />
 		};
 		const colors = [];
 		selectedColors.forEach((color) => {

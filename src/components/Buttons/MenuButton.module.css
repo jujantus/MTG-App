@@ -1,0 +1,61 @@
+.animatedIcon {
+	position: relative;
+	width: 38px;
+	height: 38px;
+	cursor: pointer;
+	-webkit-transition: .3s;
+	transition: .3s;
+	display: inline-block;
+}
+.animatedIcon .ani {
+	top: 18.5px;
+	left: 5px;
+}
+.animatedIcon .ani,
+.animatedIcon .ani:before,
+.animatedIcon .ani:after {
+	content: '';
+	position: absolute;
+	height: 3px;
+	width: 28px;
+	background: rgb(33, 33, 33);
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+.animatedIcon .ani:before,
+.animatedIcon .ani:after {
+	background: inherit;
+}
+
+.animatedIcon.menuArrowL.anim {
+	-webkit-transform: rotate(-180deg);
+	-ms-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
+.animatedIcon.menuArrowL .ani:before {
+	top: -8px;
+	right: 0;
+}
+.animatedIcon.menuArrowL .ani:after {
+	top: 8px;
+	right: 0;
+}
+.animatedIcon.menuArrowL.anim .ani {
+	width: 27px;
+}
+.animatedIcon.menuArrowL.anim .ani:before {
+	top: -5.5px;
+	width: 18px;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	right: -4px;
+}
+.animatedIcon.menuArrowL.anim .ani:after {
+	top: 5.5px;
+	width: 18px;
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	right: -4px;
+}

@@ -9,6 +9,20 @@ import Fab from '@material-ui/core/Fab';
 import ManaCheckbox from '../Filtering/ManaCheckbox/ManaCheckbox';
 import LineGridList from '../LineGridList';
 import Collapse from '@material-ui/core/Collapse';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme) => ({
+	root: {
+		position: 'relative'
+	},
+	spinner: {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)'
+	}
+});
 
 class RenderSearch extends React.Component {
 	constructor(props) {
@@ -94,10 +108,13 @@ class RenderSearch extends React.Component {
 	};
 
 	render() {
+		const { classes } = this.props;
 		return (
 			<React.Fragment>
 				{this.state.loading ? (
-					<Spinner />
+					<div className={classes.spinner}>
+						<Spinner />
+					</div>
 				) : this.state.error ? (
 					<NotFound />
 				) : this.state.cardList ? (
@@ -111,4 +128,8 @@ class RenderSearch extends React.Component {
 	}
 }
 
-export default RenderSearch;
+RenderSearch.propTypes = {
+	classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(RenderSearch);
