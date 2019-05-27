@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './MenuButton.module.css';
 import classNames from 'classnames';
-import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 
 export default class MenuButton extends React.Component {
 	constructor(props) {
@@ -22,13 +22,15 @@ export default class MenuButton extends React.Component {
 
 	render() {
 		return (
-			<button onClick={this.click}>
-				<MenuIcon
-					className={classNames(classes.animatedIcon, classes.menuArrowL, classes.ani, {
+			<IconButton color={this.props.color} aria-label={this.props.ariaLabel} onClick={this.click}>
+				<div
+					className={classNames(classes.animatedIcon, classes.menuArrowL, {
 						[classes.anim]: this.state.clicked
 					})}
-				/>
-			</button>
+				>
+					<div className={classes.ani} />
+				</div>
+			</IconButton>
 		);
 	}
 }

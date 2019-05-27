@@ -5,27 +5,27 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-// import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
+// import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import FilterIcon from '@material-ui/icons/FilterList';
 // import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import ListItemText from '@material-ui/core/ListItemText';
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
 // import MailIcon from '@material-ui/icons/Mail';
+// import List from '@material-ui/core/List';
 import MenuItem from '@material-ui/core/MenuItem';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import Menu from '@material-ui/core/Menu';
 import eventsHub from '../../utils/eventsHub';
+import MenuButton from '../Buttons/MenuButton';
+import Autocomplete from '../Autocomplete/Autocomplete';
 
 const drawerWidth = 240;
 
@@ -184,6 +184,10 @@ class Navbar extends React.Component {
 		}
 	};
 
+	handleSuggestionSelected = (suggestion) => {
+		eventsHub.setQuickSearch(suggestion);
+	};
+
 	handleDrawerOpen = () => {
 		this.setState({ open: !this.state.open });
 	};
@@ -230,15 +234,19 @@ class Navbar extends React.Component {
 
 		return (
 			<div className={classes.root}>
-				<CssBaseline />
+				{/* <CssBaseline /> */}
 				<AppBar
 					position="fixed"
-					className={classNames(classes.appBar, {
-						[classes.appBarShift]: this.state.open
-					})}
+					className={classNames(
+						classes.appBar
+						// ,{
+						// 	[classes.appBarShift]: this.state.open
+						// }
+					)}
 				>
 					<Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
-						<IconButton
+						<MenuButton color="inherit" ariaLabel="Open drawer" onClick={this.handleDrawerOpen} />
+						{/* <IconButton
 							color="inherit"
 							aria-label="Open drawer"
 							onClick={this.handleDrawerOpen}
@@ -247,22 +255,31 @@ class Navbar extends React.Component {
 							})}
 						>
 							<MenuIcon />
-						</IconButton>
+						</IconButton> */}
 						<Typography className={classes.title} variant="h6" color="inherit" noWrap>
 							MTG-App
 						</Typography>
 						<div className={classes.search}>
-							<div className={classes.searchIcon}>
+							{/* <div className={classes.searchIcon}>
 								<SearchIcon />
-							</div>
-							<InputBase
+							</div> */}
+							<Autocomplete
+								onKeyPress={this.quickSearch}
+								onSuggestionSelected={this.handleSuggestionSelected}
+								classes={{
+									root: classes.inputRoot,
+									input: classes.inputInput
+								}}
+								quickSearch
+							/>
+							{/* <InputBase
 								placeholder="Search…"
 								onKeyPress={this.quickSearch}
 								classes={{
 									root: classes.inputRoot,
 									input: classes.inputInput
 								}}
-							/>
+							/> */}
 						</div>
 						<div className={classes.grow} />
 						<div className={classes.sectionDesktop}>
@@ -298,12 +315,10 @@ class Navbar extends React.Component {
 					}}
 					open={this.state.open}
 				>
-					{/* <div className={classes.toolbar}>
-						<IconButton onClick={this.handleDrawerClose}>
-							{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-						</IconButton>
-					</div> */}
-					<Divider />
+					<IconButton>
+						<FilterIcon />
+					</IconButton>
+
 					{/* <List>
 						{[ 'Inbox', 'Starred', 'Send email', 'Drafts' ].map((text, index) => (
 							<ListItem button key={text}>
@@ -311,9 +326,9 @@ class Navbar extends React.Component {
 								<ListItemText primary={text} />
 							</ListItem>
 						))}
-					</List>
+					{/* </List> */}
 					<Divider />
-					<List>
+					{/* <List>
 						{[ 'All mail', 'Trash', 'Spam' ].map((text, index) => (
 							<ListItem button key={text}>
 								<ListItemIcon>{index % 2 === 0 ? <MailIcon /> : <InboxIcon />}</ListItemIcon>

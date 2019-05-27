@@ -1,3 +1,5 @@
+import React from 'react';
+
 const types = [
 	'Artifact',
 	'Conspiracy',
@@ -14,6 +16,16 @@ const types = [
 	'Tribal',
 	'Vanguard'
 ];
+
+const icons = {
+	Artifact: `ms-artifact`,
+	Creature: `ms-creature`,
+	Planeswalker: `ms-planeswalker`,
+	Enchantment: `ms-enchantment`,
+	Sorcery: `ms-sorcery`,
+	Instant: `ms-instant`,
+	Land: `ms-land`
+};
 
 const superTypes = [ 'Basic', 'Elite', 'Legendary', 'Ongoing', 'Snow', 'Token', 'World' ];
 
@@ -371,4 +383,4 @@ const creatureTypes = [
 	'Zubera'
 ];
 
-export { types, superTypes, artifactTypes, enchantmentTypes, landTypes, planarTypes, creatureTypes };
+export { types, icons, superTypes, artifactTypes, enchantmentTypes, landTypes, planarTypes, creatureTypes };

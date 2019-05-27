@@ -1,28 +1,16 @@
 import React from 'react';
 import Autocomplete from '../../Autocomplete/Autocomplete';
+import '../../../../node_modules/mana-font/css/mana.min.css';
 import * as types from '../../../utils/types.js';
 
 class CardTypes extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			availableTypes: {
-				super: [],
-				sub: []
-			},
-			selectedTypes: {
-				super: [],
-				sub: []
-			}
-		};
+		this.state = {};
 	}
 	render() {
-		return (
-			<div>
-				<Autocomplete suggestions={this.props.suggestions} />
-			</div>
-		);
+		return <div>{<Autocomplete suggestions={types.types} icons={types.icons} />}</div>;
 	}
 }
 

@@ -7,6 +7,7 @@ import webService from '../../utils/webService';
 import FilterIcon from '@material-ui/icons/FilterList';
 import Fab from '@material-ui/core/Fab';
 import ManaCheckbox from '../Filtering/ManaCheckbox/ManaCheckbox';
+import { CardTypes } from '../Filtering/TypesAndStats/TypesAndStats';
 import LineGridList from '../LineGridList';
 import Collapse from '@material-ui/core/Collapse';
 import PropTypes from 'prop-types';
@@ -101,7 +102,7 @@ class RenderSearch extends React.Component {
 				</Fab>
 
 				<Collapse in={this.state.filter}>
-					<LineGridList>{[ <ManaCheckbox key={'hola'} /> ]}</LineGridList>
+					<LineGridList>{[ <ManaCheckbox key={'hola'} />, <CardTypes /> ]}</LineGridList>
 				</Collapse>
 			</React.Fragment>
 		);

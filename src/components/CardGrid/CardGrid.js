@@ -12,7 +12,8 @@ const styles = (theme) => ({
 	},
 	card: {
 		height: 400,
-		objectFit: 'contain'
+		objectFit: 'contain',
+		borderRadius: '13px'
 	}
 });
 

@@ -18,7 +18,7 @@
 	position: absolute;
 	height: 3px;
 	width: 28px;
-	background: rgb(33, 33, 33);
+	background: white;
 	-webkit-transition: .3s;
 	transition: .3s;
 }
